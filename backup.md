@@ -46,5 +46,3 @@ Regularly verify successful backups by checking generated backup files and their
 
 Feel free to customize and expand this guide according to your environment and needs.
 ```
-
-Copy and paste this updated content into your GitHub repository's `README.md` file. This version emphasizes the command lines for scheduling backups while still providing context and additional information. Adjust placeholders, instructions, and links as necessary to match your specific Tableau Server environment.
