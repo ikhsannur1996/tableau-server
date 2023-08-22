@@ -44,18 +44,21 @@ for /f "tokens=1,2 delims=:" %%a in ("%time%") do (
     set "timestamp=%%a:%%b"
 )
 
-::echo === Starting Backup : %date% %timestamp% ===
-::call tsm maintenance backup -f %backupfilename%.tsbak
-::echo === Finished Backup : %date% %timestamp% ===
+echo === Starting Backup : %date% %timestamp% ===
+call tsm maintenance backup -f %backupfilename%.tsbak
+echo === Finished Backup : %date% %timestamp% ===
 
-::echo === Moving Backup File : %date% %timestamp% ===
-::move /y "%backupSourceFolder%\%backupfilename%.tsbak" "%backupDestinationFolder%\%newbackupfilename%.tsbak"
-::echo === Finished Moving Backup file : %date% %timestamp% ===
+echo === Moving Backup File : %date% %timestamp% ===
+move /y "%backupSourceFolder%\%backupfilename%.tsbak" "%backupDestinationFolder%\%newbackupfilename%.tsbak"
+echo === Finished Moving Backup file : %date% %timestamp% ====
 
 echo === Starting Ziplog : %date% %timestamp% ===
-echo Ziplog Start Date: %startdate% %starthour%:%startmin%
+echo Ziplog Start Date: %startdate% %timestamp%
 echo Ziplog End Date: %enddate% %timestamp%
-call tsm maintenance ziplogs -f %logfilename% --startdate "%startdate% %starthour%:%startmin%" --enddate "%enddate% %timestamp%"
+
+REM Use PowerShell to execute the ziplogs command with formatted dates
+powershell -Command "Invoke-Expression 'tsm maintenance ziplogs -f \"%logfilename%\" --startdate \"%startday%/%startmonth%/%startyear% %timestamp%\" --enddate \"%endday%/%endmonth%/%endyear% %timestamp%\"'"
+
 echo === Finished Ziplog task : %date% %timestamp% ===
 
 echo === Moving ziplog files : %date% %timestamp% ===
@@ -69,8 +72,10 @@ for %%F in ("%logSourceFolder%\*") do (
 )
 echo === Finished Moving ziplog files : %date% %timestamp% ===
 
-::echo === Starting Cleanup : %date% %timestamp% ===
-::call tsm maintenance cleanup
-::echo === Finished Cleanup : %date% %timestamp% ===
+echo === Starting Cleanup : %date% %timestamp% ===
+call tsm maintenance cleanup
+echo === Finished Cleanup : %date% %timestamp% ===
+
+echo === All Task Complete: %date% %timestamp% ===
 
 endlocal
