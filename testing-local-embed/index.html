@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Embedded Tableau Visualizations</title>
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #333;
+      color: #fff;
+    }
 
+    /* Tab styles */
+    .tab {
+      display: none;
+    }
+
+    /* Style the dropdown container */
+    .dropdown-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 10px;
+      position: relative;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown span {
+      padding: 8px 12px;
+      background-color: #444;
+      border: 1px solid #999;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #555;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 2; /* Ensure the dropdown content is above the dashboard */
+      border-radius: 4px;
+      padding: 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: #fff;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #666;
+    }
+
+    /* Ensure the container doesn't overlap with visualizations */
+    .container {
+      padding: 20px;
+      margin-top: 60px;
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative; /* Set the container as relative positioning */
+      z-index: 0; /* Ensure the dashboard is below the dropdown */
+    }
+
+    /* Additional styles for better UI */
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .dropdown span {
+      border-radius: 4px;
+    }
+
+    .dropdown-content {
+      border-radius: 4px;
+      padding: 0;
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Separate select menus for Highlight and Forecasting */
+    .select-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    select {
+      padding: 8px 12px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      background-color: #444;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 0 10px;
+      color: #fff;
+    }
+
+    /* Styles for Visualization Type selection */
+    .select-container select {
+      min-width: 300px; /* Set a minimum width for better display */
+    }
+
+    /* Horizontal tabs */
+    .tab-selector {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .tab-selector button {
+      padding: 8px 16px;
+      border: 1px solid #999;
+      border-radius: 4px;
+      background-color: #444;
+      font-size: 14px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .tab-selector button.active {
+      background-color: #666;
+    }
+
+    /* Different color for selected Visualization in the menu */
+    .dropdown-content a.selected {
+      background-color: orange; /* Change the background color to orange */
+    }
+  </style>
+</head>
+<body>
+  <h1>Tableau Visualizations</h1>
+  <div class="dropdown-container">
+    <div class="dropdown">
+      <span id="environment-menu" onclick="toggleDropdown('environment-menu')">Select Environment ▼</span>
+      <ul class="dropdown-content" id="environment-dropdown">
+        <li><a onclick="selectEnvironment('default')">Default</a></li>
+        <li><a onclick="selectEnvironment('production')">Production</a></li>
+        <li><a onclick="selectEnvironment('development')">Development</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="select-container">
+    <div class="tab-selector">
+      <button onclick="openTab('highlight-' + selectedEnvironment)" class="active">Highlight</button>
+      <button onclick="openTab('forecast-' + selectedEnvironment)">Forecast</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="highlight-default" class="tab">
+        <p>Default Highlight Visualization</p>
+        <script type='text/javascript' src='https://tableau.bukitasam.co.id/javascripts/api/viz_v1.js'></script>
+        <div class='tableauPlaceholder' style='width: 1276px; height: 699px;'>
+          <object class='tableauViz' width='1276' height='699' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Ftableau.bukitasam.co.id%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='Highlight&#47;Highlight' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='no' /> <!-- Set this to 'no' to hide toolbar -->
+            <param name='showAppBanner' value='false' />
+          </object>
+        </div>
+    </div>
+    <div id="forecast-default" class="tab">
+        <p>Default Forecast Visualization</p>
+        <script type='text/javascript' src='https://tableau.bukitasam.co.id/javascripts/api/viz_v1.js'></script>
+        <div class='tableauPlaceholder' style='width: 1276px; height: 699px;'>
+          <object class='tableauViz' width='1276' height='699' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Ftableau.bukitasam.co.id%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='ForecastingAnalytics&#47;Forecasting' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='no' /> <!-- Set this to 'no' to hide toolbar -->
+            <param name='showAppBanner' value='false' />
+          </object>
+        </div>
+      
+    </div>
+    <div id="highlight-production" class="tab">
+        <p>Highlight Production Visualization</p>
+        <script type='text/javascript' src='https://tableau.bukitasam.co.id/javascripts/api/viz_v1.js'></script>
+        <div class='tableauPlaceholder' style='width: 1276px; height: 699px;'>
+            <object class='tableauViz' width='1276' height='699'>
+                <param name='host_url' value='https%3A%2F%2Ftableau.bukitasam.co.id%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='&#47;t&#47;batic' />
+                <param name='name' value='Highlight&#47;Highlight' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='no' /> <!-- Set 'toolbar' to 'no' to hide the menu -->
+                <param name='showAppBanner' value='false' />
+            </object>
+        </div>        
+    </div>
+    <div id="forecast-production" class="tab">
+        <p>Forecast Production Visualization</p>
+        <script type='text/javascript' src='https://tableau.bukitasam.co.id/javascripts/api/viz_v1.js'></script>
+        <div class='tableauPlaceholder' style='width: 1276px; height: 699px;'>
+            <object class='tableauViz' width='1276' height='699'>
+                <param name='host_url' value='https%3A%2F%2Ftableau.bukitasam.co.id%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='&#47;t&#47;batic' />
+                <param name='name' value='ForecastingAnalytics&#47;Forecasting' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='no' /> <!-- Set 'toolbar' to 'no' to hide the menu -->
+                <param name='showAppBanner' value='false' />
+            </object>
+        </div>
+    </div>
+    <div id="highlight-development" class="tab">
+        <p>Highlight Development Visualization</p>
+        <script type='text/javascript' src='https://tableau.bukitasam.co.id/javascripts/api/viz_v1.js'></script>
+        <div class='tableauPlaceholder' style='width: 1276px; height: 699px;'>
+            <object class='tableauViz' width='1276' height='699'>
+                <param name='host_url' value='https%3A%2F%2Ftableau.bukitasam.co.id%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='&#47;t&#47;batic-dev' />
+                <param name='name' value='Highlight&#47;Highlight' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='no' /> <!-- Set 'toolbar' to 'no' to hide the menu -->
+                <param name='showAppBanner' value='false' />
+            </object>
+        </div>        
+    </div>
+    <div id="forecast-development" class="tab">
+        <p>Forecast Development Visualization</p>
+        <script type='text/javascript' src='https://tableau.bukitasam.co.id/javascripts/api/viz_v1.js'></script>
+        <div class='tableauPlaceholder' style='width: 1276px; height: 699px;'>
+            <object class='tableauViz' width='1276' height='699'>
+                <param name='host_url' value='https%3A%2F%2Ftableau.bukitasam.co.id%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='&#47;t&#47;batic-dev' />
+                <param name='name' value='Forecasting_Analytics&#47;Forecasting' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='no' /> <!-- Set 'toolbar' to 'no' to hide the menu -->
+                <param name='showAppBanner' value='false' />
+            </object>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // Variable to store the selected environment
+    let selectedEnvironment = 'default'; // Set default environment to 'default'
+
+    // Function to switch tabs
+    function openTab(tabName) {
+      var i, tabContent;
+
+      // Hide all tab content
+      tabContent = document.getElementsByClassName("tab");
+      for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+      }
+
+      // Show the selected tab content
+      document.getElementById(tabName).style.display = "block";
+
+      // Update the active class for tab buttons
+      var buttons = document.querySelectorAll(".tab-selector button");
+      buttons.forEach(button => button.classList.remove("active"));
+      var activeButton = document.querySelector(`.tab-selector button[data-tab="${tabName}"]`);
+      if (activeButton) {
+        activeButton.classList.add("active");
+      }
+    }
+
+    // Function to handle the environment selection
+    function selectEnvironment(environment) {
+      selectedEnvironment = environment;
+      document.getElementById('environment-menu').innerText = 'Select ' + environment.charAt(0).toUpperCase() + environment.slice(1);
+      var dropdown = document.getElementById("environment-dropdown");
+      dropdown.style.display = "none";
+      openTab('highlight-' + selectedEnvironment);
+      updateVisualizationOptions();
+    }
+
+    // Function to update the select menu options based on the environment
+    function updateVisualizationOptions() {
+      var visualizationSelect = document.getElementById('visualization-type');
+      var options = visualizationSelect.options;
+
+      // Show all options first
+      for (var i = 0; i < options.length; i++) {
+        options[i].style.display = 'block';
+      }
+
+      // Hide the options that are not relevant to the selected environment
+      if (selectedEnvironment === 'production') {
+        options[3].style.display = 'none'; // Hide "Highlight (Development)" option
+        options[4].style.display = 'none'; // Hide "Forecast (Development)" option
+      } else if (selectedEnvironment === 'development') {
+        options[1].style.display = 'none'; // Hide "Highlight" option
+        options[2].style.display = 'none'; // Hide "Forecast" option
+      }
+    }
+
+    // Function to handle the select menu for Highlight and Forecasting
+    function selectVisualization(select) {
+      var selectedValue = select.value;
+      openTab(selectedValue);
+
+      // Remove "selected" class from all options
+      var options = document.querySelectorAll('.dropdown-content a');
+      options.forEach(option => option.classList.remove('selected'));
+
+      // Add "selected" class to the clicked option
+      var selectedOption = document.querySelector(`.dropdown-content a[data-value="${selectedValue}"]`);
+      if (selectedOption) {
+        selectedOption.classList.add('selected');
+      }
+    }
+
+    // Set the initial tab based on the default selected environment
+    openTab('highlight-' + selectedEnvironment);
+
+    // Event listener to close dropdown when clicked outside
+    document.addEventListener('click', function (event) {
+      var dropdown = document.getElementById("environment-dropdown");
+      var environmentMenu = document.getElementById("environment-menu");
+      if (event.target !== environmentMenu && !environmentMenu.contains(event.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+
+    // Event listener to toggle dropdown when the environment menu is clicked
+    document.getElementById("environment-menu").addEventListener('click', function () {
+      var dropdown = document.getElementById("environment-dropdown");
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+  </script>
+</body>
+</html>
