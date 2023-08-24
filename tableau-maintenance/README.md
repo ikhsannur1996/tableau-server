@@ -35,24 +35,33 @@ This documentation provides a comprehensive overview of the batch scripts includ
 - Sets the target folder for log archive files to be removed.
 - Utilizes the `forfiles` command to identify and delete log archive files older than 60 days in a recursive manner.
 
-### 5. Tableau Backup.bat
+### 6. Tableau Backup.bat
+**Purpose:** This script automates the backup process for Tableau Server. It performs the following tasks:
+
+- Calculates the current date to determine the end date for the backup.
+- Sets filenames for backup files with timestamped names.
+- Sets source and destination folder paths for backup files.
+- Initiates a backup of Tableau Server using the tsm maintenance backup command.
+- Moves the generated backup file from the source folder to the destination folder with a new timestamped name.
+
+### 7. Tableau Backup Move.bat
 
 **Purpose:** The purpose of this batch script is to automate the movement of Tableau backup files to a network storage location while excluding a specified exclusion file. The steps are as follows:
 
 - Sets the source and destination folders for backup files and the name of the exclusion file.
 - Loops through the backup files in the source folder and moves them to the destination folder while skipping the exclusion file.
 
-### 6. Tableau ZipLog.bat
+### 8. Tableau ZipLog.bat
 
 **Purpose:** This script automates the process of moving Tableau log archive files (`.zip`) to a network storage location, excluding a specified exclusion file. The workflow includes:
 
 - Sets the source and destination folders for log archive files and the name of the exclusion file.
 - Loops through the log archive files in the source folder and moves them to the destination folder while skipping the exclusion file.
 
-### 7. The Tableau Cleanup.bat
+### 9. The Tableau Cleanup.bat
 **Purpose:** This batch script is designed to perform custom cleanup tasks specific to your Tableau Server environment. The script can be tailored to execute any necessary cleanup procedures, such as removing temporary files, archiving logs, or purging specific directories. As the specific tasks performed by this script can vary widely depending on your organization's requirements, you will need to provide the script content yourself to ensure it aligns with your needs.
 
-### 8. Tableau Maintenance.bat
+### 10. Tableau Maintenance.bat
 
 **Purpose:** This comprehensive batch script handles various Tableau Server maintenance tasks. It performs the following operations:
 
