@@ -24,7 +24,7 @@ Embedding Tableau visualizations into external applications can provide real-tim
 
 Trusted Authentication simplifies user access to Tableau Server by using tokens. To verify Trusted Authentication, follow these steps:
 
-1. **Generate Trusted Tickets**: Use the `tabcmd` or `tabadmin` command to generate trusted tickets for users. This allows users to access Tableau Server without separate logins.
+1. **Generate Trusted Tickets**: This allows users to access Tableau Server without separate logins.
 
 2. **Construct URLs with Trusted Tickets**: Create URLs that include the generated trusted ticket. Users accessing these URLs will be automatically logged in using Trusted Authentication.
 
