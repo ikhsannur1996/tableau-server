@@ -67,9 +67,6 @@ To ensure optimal performance and functionality, consider whitelisting the follo
 - tabadminagent.exe
 - tabreader.exe (if Tableau Reader is installed on the server)
 
-### Additional Considerations for Non-Default Installation Paths:
-
-If your Tableau Server installation resides on a drive other than the default one, adapt the exclusion instructions accordingly. For instance, if your Tableau Server installation is located at `D:\Tableau`, exclude `D:\Tableau\Tableau Server`. Keep in mind that the effectiveness of these exclusions may vary based on the specific antivirus software in use.
 
 ### Temporary Deactivation of Antivirus Software:
 
