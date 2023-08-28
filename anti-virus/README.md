@@ -53,7 +53,6 @@ To ensure optimal performance and functionality, consider whitelisting the follo
 - run-vizportal.exe
 - run-vizqlserver.exe
 - run-webhooks.exe
-- svchost.exe
 - tabadmincontroller.exe
 - tabminerva.exe
 - tabsvs.exe
