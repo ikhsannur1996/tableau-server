@@ -65,7 +65,7 @@ To ensure optimal performance and functionality, consider whitelisting the follo
 - tabsvs.exe
 - activationservice.exe
 - tabadminagent.exe
-- tabreader.exe (if Tableau Reader is installed on the server)
+- tabreader.exe
 
 
 ### Temporary Deactivation of Antivirus Software:
