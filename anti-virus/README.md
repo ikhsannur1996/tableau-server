@@ -59,6 +59,7 @@ To ensure optimal performance and functionality, consider whitelisting the follo
 - tabsvs.exe
 - activationservice.exe
 - tabadminagent.exe
+- tabreader.exe
 
 ### Additional Considerations for Non-Default Installation Paths:
 
