@@ -14,8 +14,8 @@ When operating a Tableau Server environment, optimizing server performance invol
 
 > **Note:** On Windows, the ProgramData folder is often hidden by default. Adjust your operating system settings to display hidden files and folders. For comprehensive exclusion options, including files, folders, specific file types, and processes, refer to the relevant antivirus software documentation.
 
-### For Installation on a Different C Drive:
-If Tableau Server is installed on a drive other than the default C drive, remember to whitelist the appropriate paths for smooth operation:
+### Additional Considerations for Non-Default Installation Paths:
+If Tableau Desktop or Tableau Prep Builder is installed on a drive other than the default one, remember that certain files and folders on the default C drive also need to be excluded. Here are the paths to whitelist for smooth operation:
 
 - `E:\Tableau`
 - `C:\Program Files\Tableau`
