@@ -74,4 +74,4 @@ To diagnose potential performance issues, it's advisable to temporarily deactiva
 
 Implementing these exclusion policies according to your Tableau Server environment and antivirus software can significantly contribute to a smoother and more efficient server operation.
 
-*Source: [Tableau Knowledge Base](https://kb.tableau.com/articles/howto/improving-performance-by-using-antivirus-exclusions)*
+*Additional info: [Tableau Knowledge Base](https://kb.tableau.com/articles/howto/improving-performance-by-using-antivirus-exclusions)*
